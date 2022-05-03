@@ -13,7 +13,8 @@ reference_implementation: Utility.h reference_implementation.cpp
 	$(CXX) $(CXX_FLAGS) -o reference_implementation reference_implementation.cpp 
 
 env_file: student_submission.cpp
-	grep -o -P -e '!submission_env \K.*' student_submission.cpp > student_submission.env; [ $$? -lt 2 ]
+	#grep -o -P -e '!submission_env \K.*' student_submission.cpp > student_submission.env; [ $$? -lt 2 ]
+	sed -n -e 's/.*!submission_env \(.*\)/\1/p' student_submission.cpp > student_submission.env
 
 clean:
 	rm -f sequential_implementation student_submission reference_implementation student_submission.env *.o
