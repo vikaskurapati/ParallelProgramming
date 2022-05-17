@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
     auto image_data = static_cast<int*>(malloc(width * height * sizeof(int) * 3));
 
     // checksums for each color individually
-    Vector3 checksum(0,0,0);
+    Checksum checksum(0, 0, 0);
 
     // Iterate over each pixel and trace a ray to calculate the color.
     // This is done for samples amount of time for each pixel.
@@ -172,7 +172,6 @@ int main(int argc, char **argv) {
         }
         fclose(file);
     }
-
     writeOutput(checksum);
     free(image_data);
     return 0;
