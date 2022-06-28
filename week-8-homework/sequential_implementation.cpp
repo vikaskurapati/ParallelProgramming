@@ -9,6 +9,8 @@
 #include "Utility.h"
 #include "VideoOutput.h"
 
+#include <mpi.h>
+
 #define CODE_VERSION 1
 /*
   Apply the game of life rules on a Torus --> grid contains shadow rows and columns
@@ -76,6 +78,13 @@ void copy_edges(bool(&grid)[GRID_SIZE][GRID_SIZE]) {
 }
 
 int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
+
+    int rank;
+
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+    if(rank == 0){
     bool activateVideoOutput = false;
     if (argc > 1) {
         if (argc == 2 && strcmp(argv[1], "-g") == 0) {
@@ -123,6 +132,9 @@ int main(int argc, char** argv) {
     }
 
     delete problemData;
+    }
+
+    MPI_Finalize();
     return 0;
 }
 
