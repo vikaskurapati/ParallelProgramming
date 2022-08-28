@@ -26,7 +26,7 @@ void dmv(float *mat, float *in_vec, float *out_vec, size_t mat_size)
         for (size_t col = 0; col < mat_size; col += 8)
         {
             // TODO: define a __m256 type and load 8 float values in the matrix row into it
-
+            __m256 row_values = __mm256_loadu_ps(&mat[row]); 
             // TODO: define a __m256 type and load 8 float values in the vector into it
 
             // TODO: perform element-wise product between the above two __m256 type and store it in a new __m256 type
